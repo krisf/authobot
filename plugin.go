@@ -85,7 +85,13 @@ func (p *authobot) AuthZReq(req authorization.Request) authorization.Response {
 			}
 
 			if body.HostConfig.Privileged {
-				return authorization.Response{Msg: "use of Privileged contianers is not allowed"}
+				return authorization.Response{Msg: "use of Privileged containers is not allowed"}
+			}
+			if body.HostConfig.PidMode {
+				return authorization.Response{Msg: "use of PidMode is not allowed"}
+			}
+			if body.HostConfig.UsernsMode {
+				return authorization.Response{Msg: "use of UsernsMode is not allowed"}
 			}
 
 			// Binds is the old API
