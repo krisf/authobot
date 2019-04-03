@@ -24,12 +24,14 @@ var (
 	whitelist = []regexp.Regexp{
 		*regexp.MustCompile(`/_ping`),
 		*regexp.MustCompile(`/v.*/version`),
+                *regexp.MustCompile(`/v.*/events`),
 
 		*create,
 		*regexp.MustCompile(`/v.*/containers/.+/start`),
 		*regexp.MustCompile(`/v.*/containers/.+/stop`),
 		*regexp.MustCompile(`/v.*/containers/.+/kill`),
 		*regexp.MustCompile(`/v.*/containers/.+/json`), // inspect
+                *regexp.MustCompile(`/v.*/containers/json`), //docker ps
 		*regexp.MustCompile(`/v.*/containers/.+/exec`),
 		*regexp.MustCompile(`/v.*/containers/.+/attach`),
 		*regexp.MustCompile(`/v.*/containers/.+/wait`),
@@ -87,10 +89,10 @@ func (p *authobot) AuthZReq(req authorization.Request) authorization.Response {
 			if body.HostConfig.Privileged {
 				return authorization.Response{Msg: "use of Privileged containers is not allowed"}
 			}
-			if body.HostConfig.PidMode {
+			if body.HostConfig.PidMode == "host" {
 				return authorization.Response{Msg: "use of PidMode is not allowed"}
 			}
-			if body.HostConfig.UsernsMode {
+			if body.HostConfig.UsernsMode == "host" {
 				return authorization.Response{Msg: "use of UsernsMode is not allowed"}
 			}
 
