@@ -39,6 +39,10 @@ var (
 		*regexp.MustCompile(`/v.*/exec/.+/start`),
 		*regexp.MustCompile(`/v.*/exec/.+/json`),
 
+                *regexp.MustCompile(`/v.*/container.*`), // all container
+
+                *regexp.MustCompile(`/v.*/image.*`), // all image
+
 		*regexp.MustCompile(`/v.*/build`),
 		*regexp.MustCompile(`/v.*/images/create`), // pull
 		*regexp.MustCompile(`/v.*/images/.+/json`), // inspect
