@@ -43,6 +43,8 @@ var (
 
                 *regexp.MustCompile(`/v.*/image.*`), // all image
 
+                *regexp.MustCompile(`/v.*/network.*`), // all network
+
 		*regexp.MustCompile(`/v.*/build`),
 		*regexp.MustCompile(`/v.*/images/create`), // pull
 		*regexp.MustCompile(`/v.*/images/.+/json`), // inspect
